@@ -1,0 +1,20 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8100:8100"
+    volumes:
+      - tiledata:/data
+    environment:
+      DATA_DIR: /data
+      PYTHONPATH: /app
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3100:80"
+    depends_on:
+      - backend
+
+volumes:
+  tiledata:
